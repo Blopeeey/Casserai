@@ -1,0 +1,7 @@
+{% include 'base.html.twig' %}
+
+{% block body %}
+{% for room in room %}
+    {{ room.room_name }}
+{% endfor %}
+{% endblock %}

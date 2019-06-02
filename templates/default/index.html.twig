@@ -1,0 +1,60 @@
+{% include "base.html.twig" %}
+{% block body %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  </head>
+  <body>
+
+  <div class="position-relative overflow-hidden text-center">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <div class="yeet">
+      <h1 class="display-4 font-weight-normal">La Casserai</h1>
+      <p class="lead font-weight-normal">The juan and only.</p>
+      </div>
+    </div>
+    <div class="product-device box-shadow d-none d-md-block"></div>
+    <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="position-relative overflow-hidden p-1 p-md-1 m-md-3 text-center bg-light" id="yeet">
+      <div class="col-md-3 p-lg-3 mx-auto my-3">
+        <h2 class="font-weight-normal">The rooms</h2>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        {% for room in room %}
+        <div class="col-md-6">
+          <div class="card mb-4 box-shadow">
+            <img class="card-img-top" src="{{ vich_uploader_asset(room, 'imageFile') }}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">Naam van de kamer: {{ room.room_name }}<br/>
+              Prijs van de kamer: €{{ room.room_price }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-outline-secondary" href="/booking/{{ room.id }}">Book</a>
+                </div>
+                <small class="text-muted">Personen: {{ room.room_person_amount }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+  <script src="../../assets/js/vendor/popper.min.js"></script>
+  <script src="../../dist/js/bootstrap.min.js"></script>
+  <script src="../../assets/js/vendor/holder.min.js"></script>
+
+  </body>
+{% endblock %}
