@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Booking;
 use App\Form\BookFormType;
 use App\Entity\User;
+use App\Entity\Payment;
 
 class BookingController extends AbstractController
 {
@@ -20,7 +21,9 @@ class BookingController extends AbstractController
         $room = $em->getRepository('App:Room')->findBy(array("id" => $slug));
         $room_id = $em->getRepository('App:Room')->find($slug);
 
+
         $book_room = new Booking();
+        $pay_room = new Payment();
         $form = $this->createForm(BookFormType::class, $book_room);
         $form->handleRequest($request);
 
@@ -29,6 +32,7 @@ class BookingController extends AbstractController
             $user = $em->getRepository('App:User')->find($user_id);
             $book_room->setUser($user);
             $book_room->setRoom($room_id);
+            $book_room->setBetaal($yeet);
 
             $em->persist($book_room);
             $em->flush();

@@ -130,6 +130,11 @@ class Room
      * @ORM\Column(type="string", length=255)
      */
     public $room_description;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    public $is_popular;
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
@@ -195,6 +200,18 @@ class Room
     public function setRoomDescription(string $room_description): self
     {
         $this->room_description = $room_description;
+
+        return $this;
+    }
+
+    public function getIsPopular(): ?bool
+    {
+        return $this->is_popular;
+    }
+
+    public function setIsPopular(bool $is_popular): self
+    {
+        $this->is_popular = $is_popular;
 
         return $this;
     }

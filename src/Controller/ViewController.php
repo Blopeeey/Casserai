@@ -8,12 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ViewController extends AbstractController
 {
     /**
-     * @Route("/view/{slug}", name="view")
+     * @Route("/view", name="view")
      */
-    public function index($slug)
+    public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        $room = $em->getRepository('App:Room')->findBy(array("room_number" => $slug));
+        $room = $em->getRepository('App:Room')->findAll();
 
         return $this->render('view/index.html.twig', [
             'controller_name' => 'ViewController',
