@@ -212,28 +212,6 @@
               <item name="la_cassarai" type="b2602c69:ProjectViewProjectNode" />
               <item name="la_cassarai" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="la_cassarai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="la_cassarai" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="la_cassarai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="la_cassarai" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="la_cassarai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="la_cassarai" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="la_cassarai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="la_cassarai" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -309,12 +287,12 @@
       <workItem from="1561108519379" duration="3186000" />
       <workItem from="1561196251615" duration="18536000" />
       <workItem from="1561231627573" duration="6974000" />
-      <workItem from="1561271225826" duration="13891000" />
+      <workItem from="1561271225826" duration="14157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153134000" />
+    <option name="totallyTimeSpent" value="153400000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1382" height="744" extended-state="6" />
