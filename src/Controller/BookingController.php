@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Booking;
+use App\Repository\BookingRepository;
 use App\Form\BookFormType;
 use App\Entity\User;
 use App\Entity\Payment;
@@ -44,6 +45,18 @@ class BookingController extends AbstractController
             'controller_name' => 'BookingController',
             'room' => $room,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/ownbook", name="ownBook")
+     */
+    public function yourBookings(BookingRepository $reservationRepository){
+
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        return $this->render('myBookings.html.twig', [
+            'reservations' => $reservationRepository->findBy(['user' => $user]),
         ]);
     }
 }
