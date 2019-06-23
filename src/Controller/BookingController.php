@@ -32,7 +32,7 @@ class BookingController extends AbstractController
             $user = $em->getRepository('App:User')->find($user_id);
             $book_room->setUser($user);
             $book_room->setRoom($room_id);
-            $book_room->setBetaal($yeet);
+//            $book_room->setBetaal($yeet);
 
             $em->persist($book_room);
             $em->flush();

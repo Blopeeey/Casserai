@@ -155,6 +155,11 @@ class Room
         }
     }
 
+//    public function __toString()
+//    {
+//        return $this->id;
+//    }
+
     public function getImageFile(): ?File
     {
         return $this->imageFile;

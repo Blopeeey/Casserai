@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Room;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
+use App\Repository\BookingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,4 +94,31 @@ class RoomController extends AbstractController
 
         return $this->redirectToRoute('room_index');
     }
+
+//    /**
+//     * @Route("/view", name="view_check", methods={"POST"})
+//     */
+//    public function checkDate()
+//    {
+//        $BeginDate = $_POST["BeginDate"];
+//        $EndDate = $_POST["EndDate"];
+//        echo $BeginDate;
+//        echo $EndDate;
+//        $reservering = $this->getDoctrine()
+//            ->getRepository(view::class)
+//            ->getBetween(array($BeginDate, $EndDate));
+//
+//        $input = array();
+//        for ($x = 0; $x < count($reservering); $x++) {
+//            array_push($input, $reservering[$x][1]);
+//        }
+//
+//        $available = $this->getDoctrine()
+//            ->getRepository(Room::class)
+//            ->notIn($input);
+//
+//        return $this->render('kamer/index.html.twig', [
+//            'kamers' => $available,
+//        ]);
+//    }
 }

@@ -19,6 +19,7 @@ class RoomType extends AbstractType
             ->add('imageFile', VichImageType::class)
             ->add('availability')
             ->add('room_number')
+            ->add('is_popular')
             ->add('room_description')
         ;
     }

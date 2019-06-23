@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingRepository")
  */
-class   Booking
+class Booking
 {
     /**
      * @ORM\Id()
@@ -17,28 +17,28 @@ class   Booking
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
-    private $start_time;
+    public $start_time;
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
-    private $end_time;
+    public $end_time;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Room")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $room;
+    public $room;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    public $user;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Payment", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $payment;
 

@@ -15,6 +15,7 @@
                 <th>Image name</th>
                 <th>Availability</th>
                 <th>Room_number</th>
+                <th>Room_is popular</th>
                 <th>Room_description</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <td>{{ room.imageName }}</td>
                 <td>{{ room.availability ? 'Yes' : 'No' }}</td>
                 <td>{{ room.roomNumber }}</td>
+                <td>{{ room.is_popular }}</td>
                 <td>{{ room.roomDescription }}</td>
                 <td>
                     <a href="{{ path('room_show', {'id': room.id}) }}">show</a>
