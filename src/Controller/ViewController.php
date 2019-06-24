@@ -27,8 +27,13 @@ class ViewController extends AbstractController
                 'rooms' => $roomRepository->RoomFinder($begindate, $enddate),
             ]);
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('App:Room')->findAll();
+
         return $this->render('view/index.html.twig', [
             'form' => $form->createview(),
+            'room' => $entity
         ]);
     }
 }

@@ -19,30 +19,27 @@ class RoomRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Room::class);
     }
-    public function RoomFinder($begindate, $enddate)
+
+    public function notIn(array $value)
     {
-        $query = $this->_em->createQueryBuilder();
-
-        $subquery = $this->_em->createQueryBuilder()
-            ->select('identity(booking.room)')
-            ->from(Booking::class, 'booking')
-            ->where('booking.start_time BETWEEN :from AND :to')
-            ->orWhere('booking.end_time BETWEEN :from AND :to')
-            ->orWhere(':from BETWEEN booking.start_time and booking.end_time ')
-            ->orderBy('booking.start_time', 'ASC')
-            ->setParameters(['from' => $begindate, 'to' => $enddate])
-            ->getDQL();
-
-
-        return $query->select('room')
-            ->from(Room::class, 'room')
-            ->where($query->expr()->notIn('room.id', $subquery))
-            ->getQuery()
-            ->setParameters(['from' => $begindate, 'to' => $enddate])->getResult();
+        $valueAsString = implode(",", $value);
+        if ($valueAsString == 0) {
+            return $this->createQueryBuilder('k')
+                ->getQuery()
+                ->getResult();
+        } else {
+            return $this->createQueryBuilder('k')
+                ->where("k.id NOT IN ($valueAsString)")
+                ->getQuery()
+                ->getResult();
+        }
     }
-    // /**
-    //  * @return Room[] Returns an array of Room objects
-    //  */
+
+
+    /*
+    /**
+        * @return Room[] Returns an array of Room objects
+    */
     /*
     public function findByExampleField($value)
     {

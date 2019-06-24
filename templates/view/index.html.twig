@@ -7,78 +7,41 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <h1 class="my-4">Rooms</h1>
-{#    {% for room in room %}#}
-{#            <!-- Blog Post -->#}
-{#            <div class="card mb-4">#}
-{#                <img class="card-img-top" src="{{ vich_uploader_asset(room, 'imageFile') }}" alt="RoomImage">#}
-{#                <div class="card-body">#}
-{#                    <h2 class="card-title">{{ room.room_name }}</h2>#}
-{#                    <p class="card-text">{{ room.room_description }}</p>#}
-{#                    <a href="/booking/{{ room.id }}" class="btn btn-primary">Book</a>#}
-{#                </div>#}
-{#                <div class="card-footer text-muted">#}
-{#                    Person amount: {{ room.room_person_amount }}#}
-{#                </div>#}
-{#            </div>#}
-{#    {% endfor %}#}
+    {% for room in room %}
+            <!-- Blog Post -->
+            <div class="card mb-4">
+                <img class="card-img-top" src="{{ vich_uploader_asset(room, 'imageFile') }}" alt="RoomImage">
+                <div class="card-body">
+                    <h2 class="card-title">{{ room.room_name }}</h2>
+                    <p class="card-text">{{ room.room_description }}</p>
+                    <a href="/booking/{{ room.id }}" class="btn btn-primary">Book</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Person amount: {{ room.room_person_amount }}
+                </div>
+            </div>
+    {% endfor %}
 
         </div>
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-
+            <br/><br/><br/>
             <!-- Search Widget -->
             <div class="card my-4">
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
                         <div class="container">
-                            {{ form_start(form) }}
-                            <div class="my-custom-class-for-errors">
-                                {{ form_errors(form) }}
-                                {{ form_row(form._token) }}
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    {{ form_row(form.start_time, {'attr': {'class': 'form'} }) }}
-                                </div>
-                                <div class="col">
-                                    {{ form_row(form.end_time, {'attr': {'class': 'form'}}) }}
-                                </div>
-                            </div>
-                            {{ form_end(form) }}
+                            <form action="{{ path('view_check') }}" method="post">
+                                <input type="date" name="BeginDate">
+                                <input type="date" name="EndDate"><br/>
+                                <input type="submit" name="submit">
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Categories Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Categories</h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Side Widget</h5>
-                <div class="card-body">
-
-                </div>
-            </div>
-
         </div>
 
     </div>

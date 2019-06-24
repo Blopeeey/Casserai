@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Room;
+use App\Entity\Booking;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
 use App\Repository\BookingRepository;
@@ -25,6 +26,33 @@ class RoomController extends AbstractController
             'rooms' => $roomRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/view", name="view_check", methods={"POST"})
+     */
+    public function checkDate()
+    {
+        $BeginDate = $_POST["BeginDate"];
+        $EndDate = $_POST["EndDate"];
+
+        $reservering = $this->getDoctrine()
+            ->getRepository(Booking::class)
+            ->getBetween(array($BeginDate, $EndDate));
+
+        $input = array();
+        for ($x = 0; $x < count($reservering); $x++) {
+            array_push($input, $reservering[$x][1]);
+        }
+
+        $available = $this->getDoctrine()
+            ->getRepository(Room::class)
+            ->notIn($input);
+
+        return $this->render('view/index.html.twig', [
+            'room' => $available,
+        ]);
+    }
+
 
     /**
      * @Route("/new", name="room_new", methods={"GET","POST"})
