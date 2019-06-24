@@ -7,6 +7,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>room_id</th>
+                <th>username</th>
                 <th>Start_time</th>
                 <th>End_time</th>
                 <th>actions</th>
@@ -16,6 +18,8 @@
         {% for booking in bookings %}
             <tr>
                 <td>{{ booking.id }}</td>
+                <td>{{ booking.room }}</td>
+                <td>{{ booking.user }}</td>
                 <td>{{ booking.startTime ? booking.startTime|date('Y-m-d') : '' }}</td>
                 <td>{{ booking.endTime ? booking.endTime|date('Y-m-d') : '' }}</td>
                 <td>
