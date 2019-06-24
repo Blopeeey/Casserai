@@ -1,0 +1,26 @@
+{% include 'base.html.twig' %}
+
+{% block body %}
+    {% for room in room %}
+<!-- Page Content -->
+<div class="container">
+    <h1 class="my-4">{{ room.room_name }}
+    </h1>
+    <div class="row">
+        <div class="col-md-8">
+            <img class="img-fluid" src="{{ vich_uploader_asset(room, 'imageFile') }}" alt="">
+        </div>
+        <div class="col-md-4">
+            <h3 class="my-3">Room Description</h3>
+            <p>{{ room.room_description }}</p>
+            <h3 class="my-3">Room Details</h3>
+            <ul>
+                <li>Price: €{{ room.room_price }}</li>
+                <li>Person amount: {{ room.room_person_amount }}</li>
+            </ul>
+            <h3 class="my-3">Book room</h3>
+            {{  include('Booking/_form.html.twig') }}
+        </div>
+    </div>
+    {% endfor %}
+    {% endblock %}

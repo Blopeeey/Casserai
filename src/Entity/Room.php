@@ -17,8 +17,11 @@ class Room
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
-
+    public $id;
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
     /**
      * @ORM\Column(type="string", length=255)
      */

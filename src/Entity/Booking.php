@@ -40,7 +40,7 @@ class Booking
      * @ORM\OneToOne(targetEntity="App\Entity\Payment", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $payment;
+    public $payment;
 
     public function getId(): ?int
     {

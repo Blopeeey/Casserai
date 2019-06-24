@@ -2,50 +2,98 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Booking;
-use App\Repository\BookingRepository;
-use App\Form\BookFormType;
-use App\Entity\User;
 use App\Entity\Payment;
+use App\Form\BookFormType;
+use App\Form\BookingType;
+use App\Repository\BookingRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/booking")
+ */
 class BookingController extends AbstractController
 {
     /**
-     * @Route("/booking/{slug}", name="booking")
+     * @Route("/", name="booking_index", methods={"GET"})
      */
-    public function index($slug, Request $request)
+    public function index(BookingRepository $bookingRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
-        $room = $em->getRepository('App:Room')->findBy(array("id" => $slug));
-        $room_id = $em->getRepository('App:Room')->find($slug);
+        return $this->render('booking/index.html.twig', [
+            'bookings' => $bookingRepository->findAll(),
+        ]);
+    }
 
-
-        $book_room = new Booking();
-        $pay_room = new Payment();
-        $form = $this->createForm(BookFormType::class, $book_room);
+    /**
+     * @Route("/new", name="booking_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $booking = new Booking();
+        $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $user_id = $this->getUser()->getId();
-            $user = $em->getRepository('App:User')->find($user_id);
-            $book_room->setUser($user);
-            $book_room->setRoom($room_id);
-//            $book_room->setBetaal($yeet);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($booking);
+            $entityManager->flush();
 
-            $em->persist($book_room);
-            $em->flush();
-
-            return $this->redirectToRoute('default');
+            return $this->redirectToRoute('booking_index');
         }
 
-        return $this->render('booking/index.html.twig', [
-            'controller_name' => 'BookingController',
-            'room' => $room,
-            'form' => $form->createView()
+        return $this->render('booking/new.html.twig', [
+            'booking' => $booking,
+            'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="booking_show", methods={"GET"})
+     */
+    public function show(Booking $booking): Response
+    {
+        return $this->render('booking/show.html.twig', [
+            'booking' => $booking,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="booking_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Booking $booking): Response
+    {
+        $form = $this->createForm(BookingType::class, $booking);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('booking_index', [
+                'id' => $booking->getId(),
+            ]);
+        }
+
+        return $this->render('booking/edit.html.twig', [
+            'booking' => $booking,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="booking_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Booking $booking): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$booking->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($booking);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('booking_index');
     }
 
     /**
@@ -59,4 +107,5 @@ class BookingController extends AbstractController
             'reservations' => $reservationRepository->findBy(['user' => $user]),
         ]);
     }
+
 }
